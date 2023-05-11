@@ -34,7 +34,7 @@ const patchCategory = (req, res) => {
     categoriesControllers.updateCategory(id,{name})
         .then((data) => {
             if(data){
-                res.status(200).json()
+                res.status(200).json(data)
             } else {
                 res.status(404).json({message: `Category with id:${id}, Not Found`})
             }

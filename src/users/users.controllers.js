@@ -31,6 +31,7 @@ const createUser= async(obj)=>{
    return data
 }
 
+
 const updateUser = async (id, obj) => {
     const data = await Users.update(obj, {
         where: {

@@ -10,7 +10,7 @@ const Comments= db.define('comments',{
         type:DataTypes.UUID,
         primaryKey:true
     },
-    comment:{
+    content:{
         type:DataTypes.STRING,
         allowNull:false
        

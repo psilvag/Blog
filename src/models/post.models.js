@@ -1,5 +1,5 @@
 
-// CARDINALITY: 1 category has a lot post
+
 const { DataTypes } = require('sequelize')
 const db=require('../utils/databse')
 const Categories=require('./categories.models')

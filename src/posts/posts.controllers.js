@@ -12,7 +12,33 @@ const findAllPosts=async()=>{
         },
         include:[
             {
-                model:Categories  
+                model:Categories,
+                attributes:['name']  
+            },
+            {
+                model:Users, 
+                attributes:{  
+                    exclude:['email','password','role','age']
+                }
+    
+            }
+        ],
+    })
+    
+    return data
+}
+const findAllPostsByCategoryId=async(id)=>{
+    const data =await Posts.findAll({
+        attributes:{
+            exclude:['categoryId','userId']
+        },
+        where:{
+            categoryId:id 
+        },
+        include:[
+            {
+                model:Categories,
+                attributes:['name']  
             },
             {
                 model:Users, 
@@ -39,8 +65,30 @@ const createPost=async(obj)=>{
   return data
 }
 
+const patchPost=async (id, obj)=>{
+    const data=await Posts.update(obj,{
+        where:{
+            id:id
+        }
+    })
+    return data[0]
+}
+
+const deletePost=async (id)=>{
+    const data=await Posts.destroy ({
+        where:{
+            id:id
+        }
+    })
+    return data
+}
+
+
 
 module.exports={
     findAllPosts,
-    createPost
+    findAllPostsByCategoryId,
+    createPost,
+    patchPost,
+    deletePost
 }
