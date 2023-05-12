@@ -62,10 +62,12 @@ const deleteCategory = (req, res) => {
 
 
 
+
 module.exports= {
     getAllCategories,
     postCategory,
     patchCategory,
-    deleteCategory
+    deleteCategory,
+    getMyOwnCategories
    
 }

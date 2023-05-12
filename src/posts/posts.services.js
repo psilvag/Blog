@@ -81,10 +81,100 @@ const deletePost = (req, res) => {
         })
 }
 
+// ------------------------MY POSTS--------------------
+
+const getAllMyPosts=(req,res)=>{
+    const userId=req.user.id
+    postsControllers.findMyOwnPosts(userId)
+    .then(data=>{
+        if(data){
+            res.status(200).json(data)
+        }
+        else{
+            res.status(404).json({
+                message:'userId not found'
+            })
+        }
+    })
+    .catch(err=>{
+        res.status(400).json({
+            message:err.message
+        })
+    })
+}
+
+const patchMyPost=(req,res)=>{
+    const postId=req.params.postId
+    const {title,content}=req.body
+    postsControllers.patchMyPost(postId,{title,content})
+    .then(data=>{
+        if(data){
+            res.status(200).json(data)
+        }
+        else{
+            res.status(404).json({
+                message:'postId not found'
+            })
+        }
+    })
+    .catch(err=>{
+        res.status(400).json({
+            message:err.message
+        })
+    })
+}
+
+const deleteMyPost=(req,res)=>{
+    const postId=req.params.postId
+    postsControllers.deleteMyPost(postId)
+    .then(data=>{
+        if(data){
+            res.status(204).json({
+                message:'Delete post successfuly'
+            })
+        }
+        else{
+            res.status(404).json({
+                message:'postId not found'
+            })
+        }
+    })
+    .catch(err=>{
+        res.status(400).json({
+            message:err.message
+        })
+    })
+}
+
+const getPostsILike=(req,res)=>{
+    const userId=req.user.id 
+    postsControllers.findPostsILike(userId)
+    .then(data=>{
+        if(data){
+            res.status(200).json(data)
+        }
+        else{
+            res.status(404).json({
+                message:'userId not found'
+            })
+        }
+    })
+    .catch(err=>{
+        res.status(400).json({
+            message:err.message
+        })
+    })
+}
+
+
 module.exports={
     getAllPosts,
     getAllPostsByCategoryId,
     postNewPost,
     patchPost,
-    deletePost
+    deletePost,
+    getAllMyPosts,
+    patchMyPost,
+    deleteMyPost,
+    getPostsILike
 }

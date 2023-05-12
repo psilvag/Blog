@@ -4,7 +4,7 @@ const Posts=require('../models/post.models')
 const uuid=require('uuid')
 const Categories=require('../models/categories.models')
 const Users=require('../models/users.models')
-
+const Likes=require('../models/likes.models')
 const findAllPosts=async()=>{
     const data =await Posts.findAll({
         attributes:{
@@ -83,6 +83,59 @@ const deletePost=async (id)=>{
     return data
 }
 
+// ------------------------MY POSTS--------------------
+
+const findMyOwnPosts=async(userId)=>{
+    const data=await Posts.findAll({
+        where:{
+            userId:userId
+        }
+    })
+    return data
+}
+
+const patchMyPost=async(postId,obj)=>{
+    const data=await Posts.update(obj,{
+        where:{
+            id:postId
+        }
+    })
+    return data[0]
+}
+
+const deleteMyPost=async(postId)=>{
+    const data=await Posts.destroy({
+        where:{
+            id:postId
+        }
+    })
+    return data
+}
+
+// THE POSTS I LIKE
+
+const findPostsILike=async(userId)=>{
+    const data= await Posts({
+        attributes:['title'],
+
+        include:[
+            {
+            model:Likes,
+            where:{
+                userId:userId
+            }
+        },
+        {
+            model:Categories,
+            attributes:['name']
+        }
+        ]
+    })
+    return data
+}
+
+
+
 
 
 module.exports={
@@ -90,5 +143,10 @@ module.exports={
     findAllPostsByCategoryId,
     createPost,
     patchPost,
-    deletePost
+    deletePost,
+    findMyOwnPosts,
+    patchMyPost,
+    deleteMyPost,
+    findPostsILike
+
 }

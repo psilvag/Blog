@@ -8,7 +8,7 @@ const categoriesServices=require('./categories.services')
 
 router.route('/')
 .get(categoriesServices.getAllCategories)
-.post(passportJWT.authenticate('jwt',{session:false}),categoriesServices.postCategory)
+.post(passportJWT.authenticate('jwt',{session:false}),roleMiddleware,categoriesServices.postCategory)
 
 router.route('/:id')
 .patch(passportJWT.authenticate('jwt',{session:false}),roleMiddleware,categoriesServices.patchCategory)

@@ -5,7 +5,7 @@ const getAllCategories= async ()=>{
      return data
 }
 
-
+ // require rol middleware
 const createCategory = async (obj) => {
     const data= await Categories.create({
           name:obj.name   
@@ -33,10 +33,16 @@ const deleteCategory = async (id) => {
    return data
 }
 
+//============MY CATEGORIES===============
+
+
+
+
 module.exports = {
 getAllCategories,
 createCategory,
 updateCategory,
-deleteCategory
+deleteCategory,
+getAllMyCategories
 
  }
