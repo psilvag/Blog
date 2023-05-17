@@ -1,11 +1,11 @@
 
  const {findUserByEmail}=require('../users/users.controllers')
-const {comparePassword}=require('../utils/crypt')
+const {comparePass}=require('../utils/crypt')
 
  const checkUserCredentials=async (email, password)=>{
  try{
     const user= await findUserByEmail(email)
-    const verifyPassword= comparePassword(password,user.password)
+    const verifyPassword= comparePass(password,user.password)
     if(verifyPassword){
         return user
     }

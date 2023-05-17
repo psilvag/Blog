@@ -19,7 +19,7 @@ module.exports={
     jwt_secret:process.env.JWT_SECRET
    },
    dB:{
-    dbConnectionString:procces.env.DATABASE_URL
+    dbConnectionString:process.env.DATABASE_URL
    }
 
 }

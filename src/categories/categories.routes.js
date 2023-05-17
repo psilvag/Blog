@@ -1,5 +1,5 @@
 
-const router=requrie('express').Router()
+const router=require('express').Router()
 const roleMiddleware=require('../../middleware/role.middleware')
 const passportJWT=require('../../middleware/auth.middleware')
 const postsServices=require('../posts/posts.services')

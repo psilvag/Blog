@@ -18,7 +18,7 @@ router.route('/me')
 
 // ROLE ADMIN 
 router.get('/:id',usersServices.getUserById)
-router.patch('/:id',usersServices.patchUser)
+router.patch('/:id',roleMiddleware,usersServices.patchUser)
 router.delete('/:id',roleMiddleware,usersServices.deleteUser)
 
 // MY POSTS

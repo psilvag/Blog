@@ -67,7 +67,6 @@ module.exports= {
     getAllCategories,
     postCategory,
     patchCategory,
-    deleteCategory,
-    getMyOwnCategories
-   
+    deleteCategory
+  
 }

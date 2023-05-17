@@ -1,6 +1,7 @@
 
 const express=require('express')
 const app=express()
+const cors = require('cors')
 const config=require('../config')
 const db=require('./utils/databse')
 const initModels=require('./models/init.models')
@@ -48,7 +49,7 @@ initModels()
 
 
 // Server listen
-app.listen(port,()=>{
+app.listen(config.api.port,()=>{
     console.log(`Server started at port:${config.api.port}`)
 })
 

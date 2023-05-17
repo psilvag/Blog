@@ -42,7 +42,6 @@ module.exports = {
 getAllCategories,
 createCategory,
 updateCategory,
-deleteCategory,
-getAllMyCategories
+deleteCategory
 
  }
