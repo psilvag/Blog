@@ -15,3 +15,4 @@ module.exports={
     hashPass,
     comparePass
 }
+

@@ -29,8 +29,8 @@
 
 
 const postLike=(req,res)=>{
-    const userId=req.user.userId 
-    const postId=req.params.postId
+    const userId=req.user.id 
+    const postId=req.params.id
     likesControllers.createLike({userId,postId})
     .then(data=>{
         if(data)

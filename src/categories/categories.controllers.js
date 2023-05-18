@@ -1,4 +1,7 @@
 const Categories = require('../models/categories.models')
+const uuid=require('uuid')
+
+
 
 const getAllCategories= async ()=>{
      const data= await Categories.findAll()
@@ -8,6 +11,7 @@ const getAllCategories= async ()=>{
  // require rol middleware
 const createCategory = async (obj) => {
     const data= await Categories.create({
+          id:uuid.v4(),
           name:obj.name   
     })
     return data

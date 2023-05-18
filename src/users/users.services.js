@@ -69,7 +69,7 @@ const getAllUsers = (req,res) => {
             if(data){
                 res.status(200).json({message: 'User Modified Succesfully'})
             } else {
-                res.status(401).json({message: 'Invalid ID'})
+                res.status(404).json({message: 'Invalid ID'})
             }
         })
         .catch((err) => {
@@ -98,8 +98,14 @@ const deleteUser = (req, res) => {
   const getMyUser=(req,res)=>{
     const id= req.user.id
     usersControllers.findUserById(id)
-    .then(data=>{             
-       res.status(200).json(data)
+    .then(data=>{    
+      if(data){
+        res.status(200).json(data)
+      } 
+      else {
+        res.status(401).json({message: 'Invalid ID'})
+    }        
+       
     })
     .catch(err=>res.status(400).json({
       message:err.message
@@ -111,7 +117,9 @@ const patchMyuser=(req,res)=>{
    const{firstName,lastName,country,age,userName}=req.body
    usersControllers.updateUser(id,{firstName,lastName,country,age,userName})
    .then(()=>{    
-    res.status(200).json() 
+    res.status(200).json({
+      message:'Your information was successfully edited'
+    }) 
    })
    .catch(err=>{
     res.status(400).json({

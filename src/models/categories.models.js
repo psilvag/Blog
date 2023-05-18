@@ -3,10 +3,10 @@
 
 const { DataTypes } = require('sequelize')
 const db=require('../utils/databse')
+
 const Categories =db.define('categories',{
     id:{
-        type:DataTypes.INTEGER,
-        autoIncrement:true,
+        type:DataTypes.UUID,
         primaryKey:true
     },
     name:{
@@ -14,7 +14,7 @@ const Categories =db.define('categories',{
         allowNull:false,
         unique:true,
         validate:{
-            len:[2,100]  // validate 2 and 50 characters on name Category
+            len:[2,100]  // validate 2 and 100 characters on name Category
         }
     }
 }

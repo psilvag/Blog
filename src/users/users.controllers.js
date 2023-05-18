@@ -12,6 +12,9 @@ const findUserById = async (id) => {
     const data = await Users.findOne({
         where: {
             id: id
+        },
+        attributes:{
+            exclude:['password','role','createdAt','updatedAt']
         }
     })
     return data
@@ -20,9 +23,9 @@ const findUserById = async (id) => {
 const createUser= async(obj)=>{
     const data= await Users.create({
       id:uuid.v4(),
-      firstName:obj.first_name,
-      lastName:obj.last_name,
-      userName:obj.username,
+      firstName:obj.firstName,
+      lastName:obj.lastName,
+      userName:obj.userName,
       email:obj.email,
       password:hashPass(obj.password),
       age:obj.age,
@@ -61,7 +64,6 @@ const findUserByEmail=async(email)=>{
     })
     return data
 }
-
 
 module.exports={
     findAllUsers,

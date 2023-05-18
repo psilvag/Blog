@@ -12,7 +12,6 @@ router.route('/')
 
 router.route('/:id')
 .patch(passportJWT.authenticate('jwt',{session:false}),roleMiddleware,categoriesServices.patchCategory)
-
 .delete(passportJWT.authenticate('jwt',{session:false}),roleMiddleware,categoriesServices.deleteCategory)
 
  router.route('/:id/posts')

@@ -1,23 +1,38 @@
 
 const Comments = require('../models/comments.models')
 const uuid=require('uuid')
+const Users = require('../models/users.models')
 
 const findAllComments= async(id)=>{
     const data= await Comments.findAll({
+        attributes:{
+            exclude:['userId','postId','createdAt','updatedAt']
+        },
         where:{
             postId:id
+        },
+        include:{
+            model:Users,
+            attributes:{
+                exclude:['userName','email','password','age','country','role']
+            }
         }
-    })
-    return data
+           
+        })
+        return data
+    }
     
-}
+    
+
 
 const createComment=async (obj)=>{
  const data=await Comments.create({
          id:uuid.v4(),
          content:obj.content,
          userId: obj.userId,
-         postId:obj.postId
+         postId:obj.postId,
+
+        
  })
 
  return data

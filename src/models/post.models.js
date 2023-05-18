@@ -28,8 +28,8 @@ const Posts =db.define('posts',{
        }
     },
    categoryId:{
-        type:DataTypes.INTEGER,
-        allowNull:true,
+        type:DataTypes.UUID,
+        allowNull:false,
         references:{
             key:'id', 
             model:Categories   

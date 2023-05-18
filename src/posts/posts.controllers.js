@@ -5,6 +5,8 @@ const uuid=require('uuid')
 const Categories=require('../models/categories.models')
 const Users=require('../models/users.models')
 const Likes=require('../models/likes.models')
+
+
 const findAllPosts=async()=>{
     const data =await Posts.findAll({
         attributes:{
@@ -18,7 +20,7 @@ const findAllPosts=async()=>{
             {
                 model:Users, 
                 attributes:{  
-                    exclude:['email','password','role','age']
+                    exclude:['email','password','role','age','userName','createdAt','updatedAt']
                 }
     
             }
@@ -43,7 +45,7 @@ const findAllPostsByCategoryId=async(id)=>{
             {
                 model:Users, 
                 attributes:{  
-                    exclude:['email','password','role','age']
+                    exclude:['email','password','role','age','userName','createdAt','updatedAt']
                 }
     
             }
