@@ -14,7 +14,7 @@ const findAllComments= async(id)=>{
         include:{
             model:Users,
             attributes:{
-                exclude:['userName','email','password','age','country','role']
+                exclude:['id','userName','email','password','age','country','role']
             }
         }
            
@@ -42,6 +42,7 @@ const patchComment=async (id, obj)=>{
     const data=await Comments.update(obj,{
         where:{
             id:id
+        
         }
     })
     return data[0]
@@ -56,11 +57,34 @@ const deleteComment=async (id)=>{
     return data
 }
 
+// MY COMMENTS
+const updateMyComment=async (userId,commentId ,obj)=>{
+    const data=await Comments.update(obj,{
+        where:{
+            id:commentId,
+            userId:userId
+        }
+    })
+    return data[0]
+}
+
+const destroyMyComment=async (userId,commentId)=>{
+    const data=await Comments.destroy({
+        where:{
+            id:commentId,
+            userId:userId
+        }
+    })
+    return data
+}
 
 
 module.exports={
     findAllComments,
     createComment,
     patchComment,
-    deleteComment
+    deleteComment,
+    updateMyComment,
+    destroyMyComment
+
 }

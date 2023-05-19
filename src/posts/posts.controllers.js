@@ -89,26 +89,44 @@ const deletePost=async (id)=>{
 
 const findMyOwnPosts=async(userId)=>{
     const data=await Posts.findAll({
+        attributes:{
+            exclude:['userId','categoryId','createdAt','updatedAt']
+        },
         where:{
             userId:userId
+        },
+        include:[
+        {
+            model:Users,
+            attributes:{
+                exclude:['id','age','role','email','password','userName','country','createdAt','updatedAt']
+            }
+        },
+        {
+            model:Categories,
+            attributes:['name']
         }
+          
+        ]
     })
     return data
 }
 
-const patchMyPost=async(postId,obj)=>{
+const patchMyPost=async(userId,postId,obj)=>{
     const data=await Posts.update(obj,{
         where:{
-            id:postId
+            id:postId,
+            userId:userId
         }
     })
     return data[0]
 }
 
-const deleteMyPost=async(postId)=>{
+const deleteMyPost=async(userId,postId)=>{
     const data=await Posts.destroy({
         where:{
-            id:postId
+            id:postId,
+            userId:userId
         }
     })
     return data
@@ -117,23 +135,19 @@ const deleteMyPost=async(postId)=>{
 // THE POSTS I LIKE
 
 const findPostsILike=async(userId)=>{
-    const data= await Posts({
-        attributes:['title'],
-
-        include:[
-            {
-            model:Likes,
-            where:{
+    const data= await Likes.findAll({
+        where:{
                 userId:userId
-            }
-        },
-        {
-            model:Categories,
-            attributes:['name']
-        }
-        ]
+        },   
+         include:{
+            model:Posts,
+            attributes:['title'],
+          
+         } 
+        
+      
     })
-    return data
+    return data.map(like=>like.post)
 }
 
 

@@ -37,7 +37,9 @@
    commentsControllers.patchComment(id,{content})
         .then((data) => {
             if(data){
-                res.status(200).json(data)
+                res.status(200).json({
+                    message:'Update successfully'
+                })
             } else {
                 res.status(404).json({message: `Comment with id:${id}, Not Found`})
             }
@@ -53,9 +55,51 @@ const deleteComment = (req, res) => {
     commentsControllers.deleteComment(id)
         .then((data) => {
             if(data){
-                res.status(204).json()
+                res.status(204).json({
+                    message:'Delete successfully'
+                })
             } else {
                 res.status(404).json({message: `Comment with id:${id}, Not Found`})
+            }
+        })
+        .catch((err) => {
+            res.status(400).json({message: err.message})
+        })
+}
+
+//-------------------MY COMMENTS-----------------------
+
+const patchMyComment = (req, res) => {
+    const userId = req.user.id
+    const commentId=req.params.comId
+    const {content}=req.body
+   commentsControllers.updateMyComment(userId,commentId,{content})
+        .then((data) => {
+            if(data){
+                res.status(200).json({
+                    message:'Update successfully'
+                })
+            } else {
+                res.status(401).json({message:'You can`t update this comment'})
+            }
+        })
+        .catch((err) => {
+            res.status(400).json({message: err.message})
+        })
+}
+
+
+const deleteMyComment = (req, res) => {
+    const userId = req.user.id
+    const commentId=req.params.comId
+    commentsControllers.destroyMyComment(userId,commentId)
+        .then((data) => {
+            if(data){
+                res.status(204).json({
+                    message:'Delete successfully'
+                })
+            } else {
+                res.status(401).json({message:'You can`t delete this comment'})
             }
         })
         .catch((err) => {
@@ -70,5 +114,7 @@ const deleteComment = (req, res) => {
     getAllComments,
     postComment,
     patchComment,
-    deleteComment
+    deleteComment,
+    patchMyComment,
+    deleteMyComment
   }

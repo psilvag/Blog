@@ -104,16 +104,19 @@ const getAllMyPosts=(req,res)=>{
 }
 
 const patchMyPost=(req,res)=>{
-    const postId=req.params.postId
+    const postId=req.params.id
+    const userId=req.user.id
     const {title,content}=req.body
-    postsControllers.patchMyPost(postId,{title,content})
+    postsControllers.patchMyPost(userId,postId,{title,content})
     .then(data=>{
         if(data){
-            res.status(200).json(data)
+            res.status(200).json({
+                message:'Update successfully'
+            })
         }
         else{
-            res.status(404).json({
-                message:'postId not found'
+            res.status(401).json({
+                message:'You can`t update this post,you are not the owner'
             })
         }
     })
@@ -125,8 +128,9 @@ const patchMyPost=(req,res)=>{
 }
 
 const deleteMyPost=(req,res)=>{
-    const postId=req.params.postId
-    postsControllers.deleteMyPost(postId)
+    const postId=req.params.id
+    const userId=req.user.id
+    postsControllers.deleteMyPost(userId,postId)
     .then(data=>{
         if(data){
             res.status(204).json({
@@ -134,8 +138,8 @@ const deleteMyPost=(req,res)=>{
             })
         }
         else{
-            res.status(404).json({
-                message:'postId not found'
+            res.status(401).json({
+                message:'You can`t delete this post,you are not the owner'
             })
         }
     })
@@ -145,13 +149,15 @@ const deleteMyPost=(req,res)=>{
         })
     })
 }
-
+// GET POSTS I LIKE
 const getPostsILike=(req,res)=>{
     const userId=req.user.id 
     postsControllers.findPostsILike(userId)
     .then(data=>{
         if(data){
-            res.status(200).json(data)
+            res.status(200).json({
+                posts:data
+        })
         }
         else{
             res.status(404).json({

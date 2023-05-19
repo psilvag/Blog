@@ -55,7 +55,9 @@ const deleteUser = async (id) => {
 }
 
 
-// database search
+
+
+// DATABASE SEARCH TO LOGIN
 const findUserByEmail=async(email)=>{
     const data= await Users.findOne({
         where:{

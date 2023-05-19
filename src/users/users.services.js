@@ -94,7 +94,7 @@ const deleteUser = (req, res) => {
 }
 
    //==========================MY USER===============================
-
+  
   const getMyUser=(req,res)=>{
     const id= req.user.id
     usersControllers.findUserById(id)
