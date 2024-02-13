@@ -1,53 +1,32 @@
+<p align="center">
+  <a href="https://nodejs.org/api/https.html" target="blank"><img src="./assets/node.png" width="500" alt="Node Logo" /></a>
+</p>
 
+# Blog API
+1. Clonar el repositorio
+2. Instalar la dependencias
+```
+npm install
+```
+3. Copiar el archivo .env.template y renombrarlo como .env
+4. Llenar las variables de entorno en funcion a la aplicacion
+5. Levantar la base de datos en docker
+```
+docker compose up -d
+```
+6. Ejecutar la aplicacion en desarrollo
+```
+npm run dev
+```
 
-BLOG API EXPRESS
+Nota: Para levantar el contenedor docker de Postgres es necesario tener instalado Docker en su PC y luego ejecutar el programa. 
 
-MODELS
+Docker para Windows:
+```
+https://docs.docker.com/desktop/install/windows-install/
+```
 
--USERS
--POSTS
--CATEGORIES
--COMENTS
--LIKES
-
-Auth
--sign up    /auth/register
--login        /auth/login
-
-// errores al compilar 
-version de bcrypt
-solucion: ejecutar 
-rmdir node_modules\bcrypt -Recurse
-
-esto remueve la carpeta bcrypt de node modules de forma recursiva
-luego volver a instalar bcrypt
-npm install bcrypt
-
-//CREATE USER
-"firstName":"Pablo",
-"lastName":"Silva",
-"userName":"psilva",
-"email":"psilva@gmail.com",
-"password":"******",
-"age":30,
-"country":"BOL"
-
-
-
-//PATCH USER
-{
-  
-"firstName":"Priscila",
-"lastName":"Estrada",
-"userName":"priscila",
-"email":"priscila@gmail.com",
-"age":39,
-"country":"ECU"
-}
-
-// CREATE POST
-{
-  "title":"Humanoid robots in the world",
-  "content":"content about robots",
-  "categoryId":"a86cb0b6-01c2-4a6f-833e-c844c0b3d672"
-}
+Docker para Linux:
+```
+https://docs.docker.com/engine/install/ubuntu/
+```

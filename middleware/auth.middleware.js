@@ -10,7 +10,7 @@ const extractJwt=require('passport-jwt').ExtractJwt // Aqui usamos el tipo de es
 const passport = require('passport')// permite decodificar tokens, validad rutas etc
 
 //==================ARCHIVOS CREADOS ==========================
-const jwtSecret = require('../config').api.jwt_secret
+const jwtSecret = require('../config').api.jwtSecret
 const {findUserById} = require('../src/users/users.controllers')
 
 
